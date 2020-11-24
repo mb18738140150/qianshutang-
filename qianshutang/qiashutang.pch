@@ -1,0 +1,245 @@
+//
+//  qiashutang.pch
+//  qianshutang
+//
+//  Created by aaa on 2018/7/16.
+//  Copyright © 2018年 mcb. All rights reserved.
+//
+
+#ifndef qiashutang_pch
+#define qiashutang_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#ifdef __OBJC__
+#define kNavigationBarHeight 44
+#define kStatusBarHeight [[UIApplication sharedApplication] statusBarFrame].size.height
+#define kTabBarHeight ([[UIApplication sharedApplication] statusBarFrame].size.height>20?83:49)
+#define isObjectNotNil(a) (a != nil)
+
+#import "UIMacro.h"
+#import "SDWebImageManager.h"
+#import "UIImageView+WebCache.h"
+#import "MBProgressHUD.h"
+#import "UIUtility.h"
+#import "MJRefresh.h"
+#import "AppDelegate.h"
+#import "UIView+HDExtension.h"
+#import "HttpRequestManager.h"
+#import "UserManager.h"
+#import "PopListView.h"
+#import "NavigationView.h"
+#import "ToolTipView.h"
+#import "HYSegmentedControl.h"
+#import "RecordAnimationView.h"
+#import "BasicCategoryView.h"
+#import "UIImageView+Color.h"
+#import "BLImagePickerViewController.h"
+#import "ProductionModel.h"
+#import "ImageProductModel.h"
+#import "TextProductModel.h"
+#import "BTVoicePlayer.h"
+#import "RecordTool.h"
+#import "SoftManager.h"
+#import "AccountInputView.h"
+#import "MKPPlaceholderTextView.h"
+#import "GSPickerView.h"
+#import "CourseTimePickerView.h"
+#import "SVProgressHUD.h"
+#import "HttpRequestManager.h"
+#import "HttpRequestProtocol.h"
+#import "CommonMacro.h"
+#import "JRSwizzle.h"
+#import "HttpUploaderManager.h"
+#import "ShareView.h"
+#import "FailedView.h"
+#import "NetMacro.h"
+#import "StarPrizeView.h"
+#import "NSString+MD5.h"
+#import "ZXVideo.h"
+#import "ZXVideoPlayerController.h"
+#import "HDNetworking.h"
+#import "HDSingleton.h"
+#import "HDPicModle.h"
+#import "JSONKit.h"
+#import "FlowerView.h"
+#import "PathUtility.h"
+#import "DBManager.h"
+#import "NotificaitonMacro.h"
+#import "WXApi.h"
+#import "WXApiManager.h"
+#import "WXApiShareManager.h"
+
+#define kSelectAddCoursewareNotification @"SelectAddCoursewareNotification"
+
+
+
+
+#import <NIMSDK/NIMSDK.h>
+#import "NIMKit.h"
+#import "CocoaLumberjack.h"
+
+#define IOS8            ([[[UIDevice currentDevice] systemVersion] doubleValue] >= 8.0)
+#define UIScreenWidth                              [UIScreen mainScreen].bounds.size.width
+#define UIScreenHeight                             [UIScreen mainScreen].bounds.size.height
+#define UISreenWidthScale   UIScreenWidth / 320
+
+
+#define UICommonTableBkgColor UIColorFromRGB(0xe4e7ec)
+#define Chatroom_Message_Font_Size 16 // 聊天室聊天文字大小
+
+
+#define SuppressPerformSelectorLeakWarning(Stuff) \
+do { \
+_Pragma("clang diagnostic push") \
+_Pragma("clang diagnostic ignored \"-Warc-performSelector-leaks\"") \
+Stuff; \
+_Pragma("clang diagnostic pop") \
+} while (0)
+
+
+#pragma mark - UIColor宏定义
+#define UIColorFromRGBA(rgbValue, alphaValue) [UIColor \
+colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 \
+green:((float)((rgbValue & 0x00FF00) >> 8))/255.0 \
+blue:((float)(rgbValue & 0x0000FF))/255.0 \
+alpha:alphaValue]
+
+#define dispatch_sync_main_safe(block)\
+if ([NSThread isMainThread]) {\
+block();\
+} else {\
+dispatch_sync(dispatch_get_main_queue(), block);\
+}
+
+#define dispatch_async_main_safe(block)\
+if ([NSThread isMainThread]) {\
+block();\
+} else {\
+dispatch_async(dispatch_get_main_queue(), block);\
+}
+
+
+
+#ifdef DEBUG
+static DDLogLevel ddLogLevel = DDLogLevelVerbose;
+#else
+static DDLogLevel ddLogLevel = DDLogLevelInfo;
+#endif
+
+#define NTES_USE_CLEAR_BAR - (BOOL)useClearBar{return YES;}
+#define NTES_FORBID_INTERACTIVE_POP - (BOOL)forbidInteractivePop{return YES;}
+
+
+
+
+typedef enum : NSUInteger {
+    MaterailType_nomal,
+    MaterailType_textbook,
+    MaterailType_ppt,
+    MaterailType_audio,
+    MaterailType_video,
+    MaterailType_text,
+    MaterailType_explain,
+    MaterailType_evaluation,
+} MaterailType;
+
+
+typedef enum : NSUInteger {
+    TaskType_none,
+    TaskType_moerduo,
+    TaskType_read,
+    TaskType_record,
+    TaskType_create,
+    TaskType_video,
+} TaskType;
+
+typedef enum : NSUInteger {
+    ProductType_none,
+    ProductType_create,
+    ProductType_record,
+} ProductType;
+
+typedef enum : NSUInteger {
+    UserType_none,
+    UserType_student,
+    UserType_teacher,
+    UserType_fenManager,
+    UserType_manager
+} UserType;
+
+typedef enum : NSUInteger {
+    
+    DownLoadType_moerduo,
+    DownLoadType_other,
+} DownLoadType;
+
+typedef enum : NSUInteger {
+    DoTaskType_nomal,
+    DoTaskType_do,
+    DoTaskType_check,
+} DoTaskType;
+
+typedef enum : NSUInteger {
+    RecordProductType_total,
+    RecordProductType_page,
+} RecordProductType;
+
+typedef enum : NSUInteger {
+    LearnTextType_read,
+    LearnTextType_record,
+    LearnTextType_audio
+} LearnTextType;
+
+typedef enum : NSUInteger {
+    CreatProductionType_new,
+    CreatProductionType_music,
+    CreatProductionType_text,
+    CreatProductionType_video,
+    CreatProductionType_photo,
+    CreatProductionType_yulan
+} CreatProductionType;
+
+typedef enum : NSUInteger {
+    CommentTaskType_studentLookSelf,
+    CommentTaskType_nomal,//老师 点评作业
+    CommentTaskType_teacherLookStudent,//老师 点评学生作品
+    CommentTaskType_teacherLookTeacherOrStar,//老师 查看教师、明星作品
+    CommentTaskType_studentLookStudent,//学生 查看学生作品
+    CommentTaskType_studentLookTeacherProduct,//学生 查看教师作品
+    CommentTaskType_studentLookStarProduct,//学生 查看明星作品
+} CommentTaskType;
+
+typedef enum : NSUInteger {
+    TaskShowType_nomal,
+    TaskShowType_teacher_yulan_suitang,
+    TaskShowType_teacher_yulan_Xilie,
+    TaskShowType_teacher_edit_Xilie,
+    TaskShowType_teacher_edit_suitang,
+    TaskShowType_Teacher_classroomTodayTask
+} TaskShowType;
+
+typedef enum : NSUInteger {
+    TaskEditType_nomal,
+    TaskEditType_ArrangeSuitangTask,
+    TaskEditType_AggangrXiLieTask,// 系列作业选择课文
+    TaskEditType_ChangeSuitangTaskTextbook, // 修改随堂作业单个课文
+    TaskEditType_addClassroomTextBook,
+    TaskEditType_addClassroomCourseWare
+} TaskEditType;
+
+typedef enum : NSUInteger {
+    collectionCellType_textbook,
+    collectionCellType_courseware,
+    
+} teacherCollectionCellType;
+
+typedef enum : NSUInteger {
+    DownloadAudioType_moerduo,
+    DownloadAudioType_read,
+} DownloadAudioType;
+
+
+#endif
+#endif /* qiashutang_pch */
